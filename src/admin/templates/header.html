@@ -1,0 +1,68 @@
+<header class="navbar navbar-dark sticky-top bg-dark flex-nowrap p-0 shadow">
+    <a class="col-3 col-lg-2 me-0 fs-6" href="/">
+        <div class="navbar-brand-text-logo d-none d-md-block"></div>
+        <div class="navbar-brand-only-logo d-md-none"></div>
+    </a>
+
+    <div class="container-fluid">
+        <nav class="d-none d-md-block" aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-chevron p-3 m-0">
+                <li class="breadcrumb-item">
+                    <a class="link-body-emphasis" href="#">
+                        <span data-feather="home" class="align-text-bottom"></span>
+                        <span class="visually-hidden">控制面板</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a class="link-body-emphasis fw-semibold text-decoration-none" href="#">监控设备</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    设备10001
+                </li>
+            </ol>
+        </nav>
+
+        <ul class="nav monitor-bar">
+            <li class="nav-item" title="在线设备" alt="在线设备">
+                <span class="d-inline-block bg-success rounded-circle p-1 me-1"></span><span data-feather="monitor"
+                    class="align-text-bottom"></span> : 0
+            </li>
+            <li class="nav-item" title="离线设备" alt="离线设备">
+                <span class="d-inline-block bg-danger rounded-circle p-1 me-1"></span><span data-feather="monitor"
+                    class="align-text-bottom"></span> : 0
+            </li>
+        </ul>
+
+        <span class="d-none d-md-block">
+            Hi Jingming!
+        </span>
+    </div>
+
+    <button class="navbar-toggler d-md-none collapsed me-3" type="button" data-bs-toggle="collapse"
+        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="dropdown d-none d-md-block text-end me-3">
+        <a href="#" class="d-block text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <span data-feather="user" class="align-text-bottom text-white"></span>
+        </a>
+        <ul class="dropdown-menu text-small pfix">
+            <li>
+                <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                    <span data-feather="settings" class="align-text-bottom"></span>
+                    系统设置
+                </a>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li>
+                <a class="dropdown-item d-flex gap-2 align-items-center text-danger" href="#">
+                    <span data-feather="log-out" class="align-text-bottom"></span>
+                    退出登录
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>

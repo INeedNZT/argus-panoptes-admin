@@ -1,0 +1,86 @@
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/feather.min.js') }}"></script>
+
+<script>
+  feather.replace({ 'aria-hidden': 'true' })
+  {#
+  (() => {
+    'use strict'
+    
+    try {
+      const iceServer = {
+        urls: 'stun:turn.jingming.blog:3488',
+        username: 'ap',
+        credential: 'ap123'
+      };
+
+      const config = {
+        iceServers: [iceServer]
+      };
+      const pc = new RTCPeerConnection(config);
+      pc.onicecandidate = async event => {
+        if (event.candidate) {
+          if (event.candidate.candidate === '') {
+            return;
+          }
+          const { candidate } = event;
+          let url;
+          if (['srflx', 'relay'].includes(candidate.type) && !candidate.url) {
+            const stats = await pc.getStats();
+            stats.forEach(report => {
+              if (!url && report.type === 'local-candidate' &&
+                report.address === candidate.address &&
+                report.port === candidate.port) {
+                url = report.url;
+              }
+            });
+          }
+
+          console.log(url)
+
+        }
+
+      };
+      let channel = pc.createDataChannel("channel");
+      pc.createOffer().then(offer => {
+        console.log(offer);
+        pc.setLocalDescription(offer).then(function () {
+          // 此时的 offer 中包含了本地 NAT 类型和外部 IP 地址
+          console.log(offer.sdp);
+        });
+      }).catch(error => console.log(`Failed to create offer: ${error}`));
+
+
+    }
+    catch (error) {
+      console.error(error)
+    }
+
+
+    const socket = io("ws://0.0.0.0:8000/signaling");
+    socket.on("connect", () => {
+      console.log('打开链接')
+    });
+    socket.on("disconnect", (reason) => {
+      console.log("连接中断")
+      if (reason === "io server disconnect") {
+        // the disconnection was initiated by the server, you need to reconnect manually
+        socket.connect();
+      }
+      // else the socket will automatically try to reconnect
+    });
+
+    socket.on("connect_error", (error) => {
+      console.log(error)
+      console.error(error)
+    });
+
+    socket.on("message", (data) => {
+      console.log('收到message', data)
+    });
+
+
+  })()
+  #}
+
+</script>
