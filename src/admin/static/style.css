@@ -1,6 +1,5 @@
 body {
   font-size: .875rem;
-  overflow: hidden;
 }
 
 .feather {
@@ -108,6 +107,3 @@ main {
 }
 
 /*Dashboard Page*/
-.ds-table-container {
-  justify-content: space-around;
-}

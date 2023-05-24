@@ -5,12 +5,17 @@
 {% endblock %}
 
 {% block content %}
-<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
 
+<div class="mb-5 mt-4">
+<h6>近期事件</h6>
+<canvas class="my-4" id="chart-container"></canvas>
+<div id="legend-container"></div>
+</div>
 
-<div class="d-flex ds-table-container">
-    <div class="col-lg-5">
-        <table class="table table-hover">
+<div class="row justify-content-lg-around">
+    <div class="col-lg-5 col-12">
+        <table class="table table-hover caption-top">
+            <caption><h6>最新日志</h6></caption>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -40,9 +45,10 @@
             </tbody>
         </table>
     </div>
-    
-    <div class="col-lg-5">
-        <table class="table table-hover">
+
+    <div class="col-lg-5 col-12">
+        <table class="table table-hover caption-top">
+            <caption><h6>最新日志</h6></caption>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -82,11 +88,12 @@
 
 {% block script %}
 <script src="{{ url_for('dashboard.static', filename='js/chart.umd.min.js') }}"></script>
+<script src="{{ url_for('dashboard.static', filename='js/html-legend-plugin.js') }}"></script>
 <script>
 
     (() => {
         // Graphs
-        const ctx = document.getElementById('myChart')
+        const ctx = document.getElementById('chart-container')
 
         // eslint-disable-next-line no-unused-vars
         const myChart = new Chart(ctx, {
@@ -102,6 +109,7 @@
                     'Saturday'
                 ],
                 datasets: [{
+                    label: 'x1',
                     data: [
                         15339,
                         21345,
@@ -111,23 +119,36 @@
                         24092,
                         12034
                     ],
-                    lineTension: 0,
-                    backgroundColor: 'transparent',
+                    backgroundColor: '#007bff',
                     borderColor: '#007bff',
-                    borderWidth: 4,
-                    pointBackgroundColor: '#007bff'
+                },
+                {
+                    label: 'x2',
+                    data: [
+                        35339,
+                        22345,
+                        8483,
+                        31003,
+                        3489,
+                        20092,
+                        10034
+                    ],
+                    backgroundColor: '#dc3545',
+                    borderColor: '#dc3545',
                 }]
             },
             options: {
                 plugins: {
-                    legend: {
-                        display: false
+                    htmlLegend: {
+                        // ID of the container to put the legend in
+                        containerID: 'legend-container',
                     },
-                    tooltip: {
-                        boxPadding: 3
+                    legend: {
+                        display: false,
                     }
                 }
-            }
+            },
+            plugins: [htmlLegendPlugin],
         })
     })()
 </script>
