@@ -8,6 +8,10 @@ body {
   height: 16px;
 }
 
+main {
+  height: calc(100vh - 68px);
+}
+
 /*Sidebar*/
 .sidebar {
   display: flex;
@@ -30,12 +34,12 @@ body {
   color: inherit;
 }
 
-@media (min-width: 768px){
-  .sidebar{
+@media (min-width: 768px) {
+  .sidebar {
     display: flex !important;
   }
 }
-  
+
 /*Navbar*/
 .nav {
   --bs-nav-link-padding-x: 1.8rem;
@@ -90,6 +94,7 @@ body {
   padding-left: 0;
   line-height: 1;
 }
+
 .breadcrumb-chevron .breadcrumb-item::before {
   gap: inherit;
   float: none;
@@ -100,4 +105,9 @@ body {
 /*MonitorBar*/
 .monitor-bar.nav .nav-item {
   margin-right: 0.75rem;
+}
+
+/*Dashboard Page*/
+.ds-table-container {
+  justify-content: space-around;
 }
